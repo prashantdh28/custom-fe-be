@@ -1,20 +1,20 @@
+# Use the official Python image from the Docker Hub with the specified version
+FROM python:3.11-slim
 
-FROM python:3.9-slim
+# Set the working directory in the container
+WORKDIR /backend
 
-# Set the working directory inside the container
-WORKDIR /app
+# Copy the requirements.txt file into the container at /backend
+COPY requirements.txt /backend/
 
-# Copy the requirements file into the container
-COPY requirements.txt .
-
-# Install the dependencies
+# Install the dependencies specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code into the container
-COPY . .
+# Copy the rest of the application code into the container at /backend
+COPY . /backend/
 
-# Expose the port your app runs on (adjust if necessary)
+# Expose the port the app runs on
 EXPOSE 5000
 
-# Command to run the application
+# Set the command to run the application
 CMD ["python", "app.py"]
